@@ -11,6 +11,7 @@ import android.bluetooth.BluetoothSocket;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.provider.Settings;
 import android.util.Log;
 
 public class BlueTooth {
@@ -33,10 +34,13 @@ public class BlueTooth {
 	// 打开蓝牙      
 	public void Open(Context context){
 		    
-		 Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);     
+		// Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE); 
+		// Intent intent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
 		 // 设置蓝牙可见性，最多300秒      
-		 intent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);     
-		 context.startActivity(intent);  		   
+		 //intent.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION, 300);     
+		 //context.startActivity(intent);  
+		//跳转到系统蓝牙设置界面
+		 context.startActivity(new Intent(Settings.ACTION_BLUETOOTH_SETTINGS));
 	} 
 	
 	//获取已配对的蓝牙设备
