@@ -24,12 +24,29 @@ public class DeviceAdapter extends ArrayAdapter<Device>{
 
 	public View getView(int position,View convertView,ViewGroup parent){
 		Device device=getItem(position);
-		View view =LayoutInflater.from(getContext()).inflate(id, null);
-		ImageView deviceImage=(ImageView) view.findViewById(R.id.device_image);
-		TextView deviceName=(TextView) view.findViewById(R.id.device_name);
-		deviceImage.setImageResource(device.getImageId());
-		deviceName.setText(device.getName());
-		return view;
+//		View view =LayoutInflater.from(getContext()).inflate(id, null);
+		View view;
+		ViewHolder viewHolder;
+		if(convertView==null){
+			view=LayoutInflater.from(getContext()).inflate(id, null);
+			viewHolder=new ViewHolder();
+			viewHolder.deviceImage=(ImageView) view.findViewById(R.id.device_image);
+			viewHolder.deviceName=(TextView) view.findViewById(R.id.device_name);
+			view.setTag(viewHolder);
+		}else{
+			view =convertView;
+			viewHolder=(ViewHolder) view.getTag();
+		}
+//		ImageView deviceImage=(ImageView) view.findViewById(R.id.device_image);
+//		TextView deviceName=(TextView) view.findViewById(R.id.device_name);
+		viewHolder.deviceImage.setImageResource(device.getImageId());
+		viewHolder.deviceName.setText(device.getName());
+		return view;		
+	}
+	
+	class ViewHolder{
+		ImageView deviceImage;
 		
+		TextView deviceName;
 	}
 }
